@@ -11,6 +11,6 @@ export class AccountMongoRepository implements AddAccountRepository {
 
     const account = await accountCollection.findOne({ _id: insertedId })
 
-    return MongoHelper.mapper(account)
+    return MongoHelper.map(account)
   }
 }
