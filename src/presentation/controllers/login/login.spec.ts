@@ -3,6 +3,10 @@ import { LoginController } from './login'
 import { badRequest } from '../../helpers/http-helper'
 import { MissingParamError } from '../../errors/missing-param-error'
 
+interface SutTypes {
+  sut: LoginController
+}
+
 const makeFakeHttpRequest = (): HttpRequest => ({
   body: {
     email: 'any_email',
@@ -10,9 +14,14 @@ const makeFakeHttpRequest = (): HttpRequest => ({
   }
 })
 
+const makeSut = (): SutTypes => {
+  const sut = new LoginController()
+  return { sut }
+}
+
 describe('Login Controller', () => {
   test('Should return 400 if no email is provided', async () => {
-    const sut = new LoginController()
+    const { sut } = makeSut()
 
     const httpRequest = makeFakeHttpRequest()
     delete httpRequest.body.email
@@ -22,7 +31,7 @@ describe('Login Controller', () => {
   })
 
   test('Should return 400 if no password is provided', async () => {
-    const sut = new LoginController()
+    const { sut } = makeSut()
 
     const httpRequest = makeFakeHttpRequest()
 
