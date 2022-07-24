@@ -18,5 +18,6 @@ export const makeSignUpController = (): Controller => {
     dbAddAccount
   )
 
-  return new LogControllerDecorator(signUpController)
+  // TODO: implement LogErrorRepository
+  return new LogControllerDecorator(signUpController, null)
 }
